@@ -3,6 +3,10 @@
 
 A little exercise to build a web application following an agile development process. See the [instructions](instructions.md) for more detail.
 
+## Team members
+
+Daniel Atlas Github profile: https://github.com/Spectraorder
+
 ## Product vision statement
 
 See instructions. Delete this line and place the Product Vision Statement here.
