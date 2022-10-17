@@ -13,7 +13,13 @@ See instructions. Delete this line and place the Product Vision Statement here.
 
 ## User stories
 
-See instructions. Delete this line and place a link to the user stories here.
+- As an international student, I want to know which flights are available to my hometown so that I can visit my hometown next long holiday.
+- As a go-local student in Shanghai, I want to know which flights are available in August so that I can get back to New York next semester.
+- As a airport manager, I wish to know which flights are delayed so that I can make the announcement to all passengers.
+- As a airport manager, I wish to check on the flights so that I can make the modification for the estimated time of arrival of the specific flights.
+- As a business traveler, I wish to know the estimated time of arrival of my flights so that I can make the arrangements.
+- As a travel tourist, I wish to know what is my flight's boarding gate so that I can check in sooner.
+- As a travel tourist, I wish to know how long my flights last so that I can determine what to do in air.
 
 ## Task boards
 
