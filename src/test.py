@@ -5,7 +5,7 @@ from flask_bootstrap import Bootstrap
 collection = pymongo.MongoClient('localhost', 27017).admin.test
 
 app = Flask(__name__)
-# Bootstrap(app)
+# Bootstrap(app) try
 bootstrap=Bootstrap(app)
   
 # home page for our application
