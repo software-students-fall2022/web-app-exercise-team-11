@@ -21,11 +21,7 @@ def home():
 @app.route('/check')
 def check():
     flights = collection.find({})
-    return render_template('check.html', flights=flights)
-
-all = collection.find({})
-for a in all:
-    print(a['_id'])
+    return render_template('normal_check.html', flights=flights)
 
 if __name__ == '__main__':
     app.run()
