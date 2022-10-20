@@ -20,6 +20,9 @@ See instructions. Delete this line and place the Product Vision Statement here.
 - As a business traveler, I wish to know the estimated time of arrival of my flights so that I can make the arrangements.
 - As a travel tourist, I wish to know what is my flight's boarding gate so that I can check in sooner.
 - As a travel tourist, I wish to know how long my flights last so that I can determine what to do in air.
+- As a traveler, I want to easily be able to check what time my flight is, so I can have an easier time remembering all the details related to my flight
+- As a traveler, I want immediate notifications of when things change (flight status, gates, etc.) so that I am updated without having to manually check my flight status frequently
+- As a traveler, I want to be able to check the airports my flight is leaving from and arriving at, so I can better adjust my plans for commuting
 
 ## Task boards
 
