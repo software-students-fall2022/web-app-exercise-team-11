@@ -38,6 +38,9 @@ def check_admin():
                 id = i["_id"] + 1
             if json_data.get('AddFlightName')!='':
                 flight_str = str(json_data.get('AddFlightName'))
+                dup = collection.find_one({"flight":flight_str})
+                if dup!=None:
+                    return render_template('admin_check.html', flights=flights, Dup=True)
             else:
                 return render_template('admin_check.html', flights=flights, ADD=True)
             if json_data.get('AddAircraft')!='':
@@ -131,4 +134,6 @@ def check_admin():
     return render_template('admin_check.html', flights=flights, date=False)
 
 if __name__ == '__main__':
+    # dup = collection.find_one({"flight":"12"})
+    # print(dup==None)
     app.run()

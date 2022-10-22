@@ -38,6 +38,12 @@
             <strong>Well Done!</strong> A new flight has been added.
         </div>
         {% endif %}
+        {% if Dup %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Sorry!</strong> There is a duplicate, you can't add a flight with the same flight number.
+        </div>
+        {% endif %}
         {% if ADD %}
         <div class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
