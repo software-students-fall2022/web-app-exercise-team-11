@@ -1,6 +1,6 @@
 {% extends "bootstrap/base.html" %}
 
-{% block title %}Check Flights{% endblock %}
+{% block title %}Flights{% endblock %}
 
 {% block navbar %}
 <div class="navbar navbar-inverse" role="navigation">
@@ -26,14 +26,26 @@
 {% block content %}
 <div class="container">
     <div class="page_content">
+        {% if date %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Sorry!</strong> You are not entering an valid date.
+        </div>
+        {% endif %}
+        {% if update %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Well Done!</strong> Edit complete.
+        </div>
+        {% endif %}
         <table class="table table-hover">
             <caption>Flights Information</caption>
                 <thead>
                     <tr>
                     <th>Flight number</th>
-                    <th>Aircraft</th>
                     <th>Departure Airport</th>
                     <th>Arrival Airport</th>
+                    <th>Departure Time</th>
                     <th>Flight Duration</th>
                     <th>Operate</th>
                     </tr>
@@ -42,9 +54,9 @@
                     {% for cur in flights %}
                     <tr>
                         <td>{{cur['flight']}}</td>
-                        <td>{{cur['aircraft']}}</td>
                         <td>{{cur['depart_port']}}</td>
                         <td>{{cur['arrive_port']}}</td>
+                        <td>{{cur['depart_time']}}</td>
                         <td>{{cur['duration']}}</td>
                         <td>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{cur['_id']}}">Edit</button>
@@ -61,10 +73,10 @@
                                         </div>
                                         <div class="modal-body">
                                             <form action="/check_ad" method='post'>
-                                                <!-- <div class="form-group"> -->
-                                                    <!-- <label for="InputID">Flight ID: {{cur['_id']}}</label> -->
-                                                    <!-- <input class="form-control" id="disabledInput" name="InputId" placeholder="{{cur['_id']}}" value="{{cur['_id']}}" disabled> -->
-                                                <!-- </div> -->
+                                                <div class="form-group">
+                                                    <label for="InputID">Flight ID: {{cur['_id']}}</label>
+                                                    <input type='hidden' name='InputID' value='{{cur['_id']}}'/>
+                                                </div>
                                                 <div class="form-group">
                                                   <label for="InputFlightName">Flight number: {{cur['flight']}}</label>
                                                   <input class="form-control" name="InputFlightName" placeholder="AB1234C">
