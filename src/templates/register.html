@@ -1,0 +1,67 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Log in{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <style>
+        html,
+        body {
+        height: 100%;
+        }
+
+        body {
+        display: flex;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 80px;
+        padding-left: 570px;
+        background-color: #ffffff;
+        }
+
+        .form-signin {
+        max-width: 330px;
+        padding: 15px;
+        }
+
+        .form-signin .form-floating:focus-within {
+        z-index: 2;
+        }
+
+        .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+        }
+
+        .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        }
+    </style>
+{% endblock %}
+ 
+{% block content %}
+<div class="container">
+  <div class="page_content">
+    <body class="text-center">
+        <main class="form-signin w-100 m-auto">
+          <form action="/register" method='post'>
+            <img class="mb-4" src="../static/images/list-columns-reverse.svg" alt="" width="72" height="57">
+            <h1 class="h3 mb-3 fw-normal">Please enter your information</h1>
+            <div class="form-floating">
+                <label for="floatingInput">Email address</label>
+                <input type="email" class="form-control" name="floatingInput" placeholder="name@example.com">
+            </div>
+            <div class="form-floating">
+                <label for="floatingPassword">Password</label>
+                <input type="password" class="form-control" name="floatingPassword" placeholder="Password">
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+          </form>
+        </main> 
+    </body>
+  </div>
+</div>
+{% endblock %}

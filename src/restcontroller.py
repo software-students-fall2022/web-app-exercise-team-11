@@ -1,40 +1,97 @@
+from distutils import log
 from re import S, T
 import pymongo
-import time
 import certifi
-from datetime import date
 from datetime import datetime
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
 
 ca = certifi.where()
 collection = pymongo.MongoClient('mongodb+srv://admin234:274373800@cluster0.o2rcwid.mongodb.net/?retryWrites=true&w=majority', tlsCAFile=ca).user.admin_user
+user_collection = pymongo.MongoClient('mongodb+srv://admin234:274373800@cluster0.o2rcwid.mongodb.net/?retryWrites=true&w=majority', tlsCAFile=ca).user.username
+admin_username = "admin@123.com"
+admin_password = "123456"
+is_admin = False
+log_in = False
 
 app = Flask(__name__)
 bootstrap=Bootstrap(app)
 
-# home page for our application
-@app.route('/')
-def home():
-    return render_template('home.html')
-
 # 404 error page for our application
-# @app.route('/404')
-# def error404():
-#     return render_template('404.html')
 @app.errorhandler(404)
 def error404(error):
   return render_template('404.html'), 404
 
+# login page
+@app.route('/')
+def login():
+    global log_in
+    log_in = False
+    return render_template('login.html')
+
+# register page
+@app.route('/register', methods=['GET', 'POST'])
+def regis():
+    if request.method == 'POST':
+        json_data = request.form
+        cur = {"username":json_data.get("floatingInput"), "password":json_data.get("floatingPassword")}
+        user_collection.insert_one(cur)
+        return render_template('login.html', CreAct = True)
+    return render_template('register.html')
+
+# home page for normal users
+@app.route('/home', methods=['GET', 'POST'])
+def home():
+    global log_in
+    if request.method == 'POST':
+        json_data = request.form
+        cur = user_collection.find_one({'username':json_data.get('floatingInput')})
+        if cur==None:
+            return render_template('login.html', NoAct=True)
+        else:
+            if cur['password'] == json_data.get('floatingPassword'):
+                log_in = True
+            else:
+                return render_template('login.html', NoAct=True)
+    else:
+        if log_in == False:
+            return render_template('login.html', NoAct=True)
+    return render_template('home.html')
+
+# home page for admin users
+# @app.route('/home_ad', methods=['GET', 'POST'])
+# def home():
+#     global log_in
+#     if request.method == 'POST':
+#         json_data = request.form
+#         cur = user_collection.find_one({'username':json_data.get('floatingInput')})
+#         if cur==None:
+#             return render_template('login.html', NoAct=True)
+#         else:
+#             if cur['password'] == json_data.get('floatingPassword'):
+#                 log_in = True
+#             else:
+#                 return render_template('login.html', NoAct=True)
+#     else:
+#         if log_in == False:
+#             return render_template('login.html', NoAct=True)
+#     return render_template('home.html')
+
 # check page for all the flights(normal users)
 @app.route('/check')
 def check():
+    global log_in
+    if log_in == False:
+        return render_template('login.html', NoAct=True)
     flights = collection.find()
     return render_template('normal_check.html', flights=flights)
 
 # check, edit, add, and delete page for all the flights(admin users)
 @app.route('/check_ad', methods=['GET', 'POST'])
 def check_admin():
+    global log_in
+    if log_in == False:
+        return render_template('login.html', NoAct=True)
     flights = collection.find()
     if request.method == 'POST':
         json_data = request.form

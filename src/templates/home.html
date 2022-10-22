@@ -12,11 +12,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Home</a>
+            <a class="navbar-brand" href="/home">Home</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/check">Flights</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Logout</a></li>
             </ul>
         </div>
     </div>
@@ -28,7 +31,30 @@
     <div class="page_content">
         <div class="jumbotron">
             <h1>The world becomes better with your existence.</h1>
-            <p><a class="btn btn-primary btn-lg" href="/" role="button">Learn more</a></p>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Learn More</button>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="myAddLabel">
+                                Hello, our dear customer!
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <h4>
+                                We wish you can use our system to manager better with your flight schedules.
+                            </h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <img src="https://get.wallhere.com/photo/Microsoft-Flight-Simulator-planes-1966431.jpg" class="img-responsive">
     </div>
