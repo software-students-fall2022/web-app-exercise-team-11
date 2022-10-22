@@ -17,7 +17,6 @@ bootstrap=Bootstrap(app)
 @app.route('/')
 def home():
     return render_template('home.html')
-    # return render_template('test.html')
 
 # 404 error page for our application
 @app.route('/404')
@@ -136,9 +135,7 @@ def check_admin():
             result = collection.delete_one({'_id':pos})
             if result.deleted_count == 1:
                 return render_template('admin_check.html', flights=flights, delete=True)
-    return render_template('admin_check.html', flights=flights, date=False)
+    return render_template('admin_check.html', flights=flights)
 
 if __name__ == '__main__':
-    # dup = collection.find_one({"flight":"12"})
-    # print(dup==None)
     app.run()
