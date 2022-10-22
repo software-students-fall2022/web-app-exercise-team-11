@@ -100,9 +100,6 @@ def check_admin():
                     if(arrive_date > depart_date):
                         duration_str = str(arrive_date - depart_date)
                         cur['duration'] = duration_str
-                        result = collection.update_one({'_id':pos}, {'$set': cur})
-                        if result.matched_count == 1:
-                            return render_template('admin_check.html', flights=flights, update=True)
                     else:
                         return render_template('admin_check.html', flights=flights, date=True)
                 except:
@@ -116,13 +113,16 @@ def check_admin():
                     if(arrive_date > depart_date):
                         duration_str = str(arrive_date - depart_date)
                         cur['duration'] = duration_str
-                        result = collection.update_one({'_id':pos}, {'$set': cur})
-                        if result.matched_count == 1:
-                            return render_template('admin_check.html', flights=flights, update=True)
+                        # result = collection.update_one({'_id':pos}, {'$set': cur})
+                        # if result.matched_count == 1:
+                        #     return render_template('admin_check.html', flights=flights, update=True)
                     else:
                         return render_template('admin_check.html', flights=flights, date=True)
                 except:
                     return render_template('admin_check.html', flights=flights, date=True)
+            result = collection.update_one({'_id':pos}, {'$set': cur})
+            if result.matched_count == 1:
+                return render_template('admin_check.html', flights=flights, update=True)
     return render_template('admin_check.html', flights=flights, date=False)
 
 if __name__ == '__main__':
