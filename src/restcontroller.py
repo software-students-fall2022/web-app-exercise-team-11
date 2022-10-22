@@ -32,9 +32,9 @@ def check_admin():
     if request.method == 'POST':
         json_data = request.form
         if(json_data.get('AddFlight') == 'true'):
-            # id = collection.estimated_document_count() + 1
-            cur = collection.find().sort({_id: -1}).limit(1)
-            id = cur['_id']
+            cur = collection.find().sort('_id',-1).limit(1)
+            for i in cur:
+                id = i["_id"] + 1
             if json_data.get('AddFlightName')!='':
                 flight_str = str(json_data.get('AddFlightName'))
             else:
@@ -113,9 +113,6 @@ def check_admin():
                     if(arrive_date > depart_date):
                         duration_str = str(arrive_date - depart_date)
                         cur['duration'] = duration_str
-                        # result = collection.update_one({'_id':pos}, {'$set': cur})
-                        # if result.matched_count == 1:
-                        #     return render_template('admin_check.html', flights=flights, update=True)
                     else:
                         return render_template('admin_check.html', flights=flights, date=True)
                 except:
@@ -126,8 +123,4 @@ def check_admin():
     return render_template('admin_check.html', flights=flights, date=False)
 
 if __name__ == '__main__':
-    # cur = collection.find().sort('_id',-1).limit(1)
-    # for i in cur:
-    #     print(i["_id"])
-    # print(cur)
     app.run()
