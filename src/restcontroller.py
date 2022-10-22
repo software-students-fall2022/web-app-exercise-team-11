@@ -19,9 +19,12 @@ def home():
     return render_template('home.html')
 
 # 404 error page for our application
-@app.route('/404')
-def error404():
-    return render_template('404.html')
+# @app.route('/404')
+# def error404():
+#     return render_template('404.html')
+@app.errorhandler(404)
+def error404(error):
+  return render_template('404.html'), 404
 
 # check page for all the flights(normal users)
 @app.route('/check')
