@@ -31,6 +31,7 @@ def check_admin():
     flights = collection.find()
     if request.method == 'POST':
         json_data = request.form
+        # if the user is adding
         if(json_data.get('AddFlight') == 'true'):
             cur = collection.find().sort('_id',-1).limit(1)
             for i in cur:
@@ -74,6 +75,7 @@ def check_admin():
             "duration":duration_str}
             collection.insert_one(cur)
             return render_template('admin_check.html', flights=flights, ADDcom=True)
+        # if the user is editing
         if(json_data.get('EditFlight') == 'true'):
             pos = int(json_data.get('InputID'))
             cur = collection.find_one({'_id':pos})
@@ -120,6 +122,7 @@ def check_admin():
             result = collection.update_one({'_id':pos}, {'$set': cur})
             if result.matched_count == 1:
                 return render_template('admin_check.html', flights=flights, update=True)
+        # if the user is deleting
         if(json_data.get('DelFlight') == 'true'):
             pos = int(json_data.get('InputID'))
             result = collection.delete_one({'_id':pos})
