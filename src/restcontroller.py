@@ -45,6 +45,10 @@ def home():
     global log_in
     if request.method == 'POST':
         json_data = request.form
+        if json_data.get('floatingInput') == admin_username:
+            if json_data.get('floatingPassword') == admin_password:
+                log_in = True
+                return render_template('admin_home.html')
         cur = user_collection.find_one({'username':json_data.get('floatingInput')})
         if cur==None:
             return render_template('login.html', NoAct=True)
@@ -59,23 +63,11 @@ def home():
     return render_template('home.html')
 
 # home page for admin users
-# @app.route('/home_ad', methods=['GET', 'POST'])
-# def home():
-#     global log_in
-#     if request.method == 'POST':
-#         json_data = request.form
-#         cur = user_collection.find_one({'username':json_data.get('floatingInput')})
-#         if cur==None:
-#             return render_template('login.html', NoAct=True)
-#         else:
-#             if cur['password'] == json_data.get('floatingPassword'):
-#                 log_in = True
-#             else:
-#                 return render_template('login.html', NoAct=True)
-#     else:
-#         if log_in == False:
-#             return render_template('login.html', NoAct=True)
-#     return render_template('home.html')
+@app.route('/home_ad', methods=['GET', 'POST'])
+def home_admin():
+    if log_in == False:
+        return render_template('login.html', NoAct=True)
+    return render_template('admin_home.html')
 
 # check page for all the flights(normal users)
 @app.route('/check')
@@ -84,7 +76,7 @@ def check():
     if log_in == False:
         return render_template('login.html', NoAct=True)
     flights = collection.find()
-    return render_template('normal_check.html', flights=flights)
+    return render_template('check.html', flights=flights)
 
 # check, edit, add, and delete page for all the flights(admin users)
 @app.route('/check_ad', methods=['GET', 'POST'])
