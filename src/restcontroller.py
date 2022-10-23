@@ -1,6 +1,3 @@
-from distutils import log
-from operator import is_
-from re import S, T
 import pymongo
 import certifi
 from datetime import datetime
@@ -190,10 +187,22 @@ def check_admin():
     return render_template('admin_check.html', flights=flights)
 
 # search page
-@app.route('/search')
+@app.route('/search', methods=['GET', 'POST'])
 def search():
     global log_in
     global is_admin
+    if request.method == 'POST':
+        json_data = request.form
+        if json_data.get('SearchFlightName')!='':
+            search_name = json_data.get('SearchFlightName')
+            cur = collection.find_one({'flight':search_name})
+            if cur!=None:
+                if is_admin:
+                    return render_template('search.html', AD=True, match=True, Flight=cur)
+                return render_template('search.html', match=True, Flight=cur)
+            if is_admin:
+                return render_template('search.html', AD=True, NotFound=True)
+            return render_template('search.html', NotFound=True)
     if log_in == False:
         return render_template('login.html', NoAct=True)
     if is_admin:
