@@ -11,7 +11,7 @@ Yvonne Wu (Yiyi Wu) Github Profile: https://github.com/Yvonne511
 
 ## Product vision statement
 
-Team 11 aims to provide real-time flight information to international students in an automated and convenient manner as well as flight management for administration through our application.
+Team 11 aims to provide real-time flight information to international students, tourists, business traveler in an automated and convenient manner as well as flight management for administration through our application.
 
 ## User stories
 
@@ -28,4 +28,5 @@ Team 11 aims to provide real-time flight information to international students i
 
 ## Task boards
 
-See instructions. Delete this line and place a link to the task boards here.
+[Task Board 1: Sprint 1](https://github.com/orgs/software-students-fall2022/projects/25)
+[Task Board 2: Sprint 2](https://github.com/orgs/software-students-fall2022/projects/26)
