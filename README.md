@@ -11,6 +11,8 @@ Yvonne Wu (Yiyi Wu) Github Profile: https://github.com/Yvonne511
 
 Shannon Huang Github Profile: https://github.com/shannonh800
 
+Zeren Lu Github Profile: https://github.com/OtisL99
+
 ## Product vision statement
 
 Our product, designed and coded by Team 11, provides real time flight information for travelers to streamline the travel plannimg process and ensure a more smooth experience, as well as flight management for airline and airport administration.
