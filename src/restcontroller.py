@@ -1,4 +1,5 @@
 from distutils import log
+from operator import is_
 from re import S, T
 import pymongo
 import certifi
@@ -26,7 +27,9 @@ def error404(error):
 @app.route('/')
 def login():
     global log_in
+    global is_admin
     log_in = False
+    is_admin = False
     return render_template('login.html')
 
 # register page
@@ -43,12 +46,14 @@ def regis():
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     global log_in
+    global is_admin
     if request.method == 'POST':
         json_data = request.form
         if json_data.get('floatingInput') == admin_username:
             if json_data.get('floatingPassword') == admin_password:
                 log_in = True
-                return render_template('admin_home.html')
+                is_admin = True
+                return render_template('home.html', AD=True)
         cur = user_collection.find_one({'username':json_data.get('floatingInput')})
         if cur==None:
             return render_template('login.html', NoAct=True)
@@ -60,14 +65,16 @@ def home():
     else:
         if log_in == False:
             return render_template('login.html', NoAct=True)
-    return render_template('home.html')
+        if is_admin:
+            return render_template('home.html', AD=True)
+    return render_template('home.html', AD=False)
 
 # home page for admin users
-@app.route('/home_ad', methods=['GET', 'POST'])
-def home_admin():
-    if log_in == False:
-        return render_template('login.html', NoAct=True)
-    return render_template('admin_home.html')
+# @app.route('/home_ad', methods=['GET', 'POST'])
+# def home_admin():
+#     if log_in == False:
+#         return render_template('login.html', NoAct=True)
+#     return render_template('home.html', AD=True)
 
 # check page for all the flights(normal users)
 @app.route('/check')
