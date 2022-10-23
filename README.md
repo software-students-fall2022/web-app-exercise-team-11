@@ -9,6 +9,8 @@ Daniel Atlas Github Profile: https://github.com/Spectraorder
 
 Yvonne Wu (Yiyi Wu) Github Profile: https://github.com/Yvonne511
 
+Shannon Huang Github Profile: https://github.com/shannonh800
+
 ## Product vision statement
 
 Our product, designed and coded by Team 11, provides real time flight information for travelers to streamline the travel plannimg process and ensure a more smooth experience, as well as flight management for airline and airport administration.
@@ -31,3 +33,8 @@ Our product, designed and coded by Team 11, provides real time flight informatio
 [Task Board 1: Sprint 1](https://github.com/orgs/software-students-fall2022/projects/25)
 
 [Task Board 2: Sprint 2](https://github.com/orgs/software-students-fall2022/projects/26)
+
+## Running the Project
+
+1. Install certifi, flask_bootstrap, flask, and pymongo
+2. The project can be run by running python file from IDE
