@@ -38,3 +38,5 @@ Our product, designed and coded by Team 11, provides real time flight informatio
 
 1. Install certifi, flask_bootstrap, flask, and pymongo
 2. The project can be run by running python file from IDE
+3. Admin Name: admin@123.com
+4. Admin Password: 123456
