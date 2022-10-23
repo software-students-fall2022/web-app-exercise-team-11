@@ -39,7 +39,7 @@ Our product, designed and coded by Team 11, provides real time flight informatio
 
 1. Install certifi, flask_bootstrap, flask, and pymongo
 2. The project can be run by running python file from IDE
-3. To sign in as an admin, use the following login information:
-    Admin Name: admin@123.com
+3. To sign in as an admin, use the following login information:  
+    Admin Name: admin@123.com  
     Admin Password: 123456
 4. To sign in as a user, make a new account and sign in with your newly created login information
