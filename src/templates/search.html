@@ -1,6 +1,6 @@
 {% extends "bootstrap/base.html" %}
 
-{% block title %}Check Flights{% endblock %}
+{% block title %}Home Page{% endblock %}
 
 {% block navbar %}
 <div class="navbar navbar-inverse" role="navigation">
@@ -16,7 +16,11 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+                {% if AD %}
+                <li><a href="/check_ad">Flights</a></li>
+                {% else %}
                 <li><a href="/check">Flights</a></li>
+                {% endif %}
             </ul>
             <ul class="nav navbar-nav">
                 <li><a href="/search">Search</a></li>
@@ -28,37 +32,10 @@
     </div>
 </div>
 {% endblock %}
- 
+
 {% block content %}
 <div class="container">
     <div class="page_content">
-        <table class="table table-hover">
-            <caption>Flights Information</caption>
-                <thead>
-                    <tr>
-                    <th>Flight number</th>
-                    <th>Aircraft</th>
-                    <th>Departure Airport</th>
-                    <th>Arrival Airport</th>
-                    <th>Departure Time</th>
-                    <th>Arrival Time</th>
-                    <th>Flight Duration</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for cur in flights %}
-                    <tr>
-                        <td>{{cur['flight']}}</td>
-                        <td>{{cur['aircraft']}}</td>
-                        <td>{{cur['depart_port']}}</td>
-                        <td>{{cur['arrive_port']}}</td>
-                        <td>{{cur['depart_time']}}</td>
-                        <td>{{cur['arrive_time']}}</td>
-                        <td>{{cur['duration']}}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-        </table>
     </div>
 </div>
 {% endblock %}

@@ -42,7 +42,7 @@ def regis():
         return render_template('login.html', CreAct = True)
     return render_template('register.html')
 
-# home page for normal users
+# home page
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     global log_in
@@ -68,13 +68,6 @@ def home():
         if is_admin:
             return render_template('home.html', AD=True)
     return render_template('home.html', AD=False)
-
-# home page for admin users
-# @app.route('/home_ad', methods=['GET', 'POST'])
-# def home_admin():
-#     if log_in == False:
-#         return render_template('login.html', NoAct=True)
-#     return render_template('home.html', AD=True)
 
 # check page for all the flights(normal users)
 @app.route('/check')
@@ -195,6 +188,17 @@ def check_admin():
             if result.deleted_count == 1:
                 return render_template('admin_check.html', flights=flights, delete=True)
     return render_template('admin_check.html', flights=flights)
+
+# search page
+@app.route('/search')
+def search():
+    global log_in
+    global is_admin
+    if log_in == False:
+        return render_template('login.html', NoAct=True)
+    if is_admin:
+        return render_template('search.html', AD=True)
+    return render_template('search.html')
 
 if __name__ == '__main__':
     app.run()
