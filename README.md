@@ -6,6 +6,7 @@ A little exercise to build a web application following an agile development proc
 ## Team members
 
 Daniel Atlas Github Profile: https://github.com/Spectraorder
+
 Yvonne Wu (Yiyi Wu) Github Profile: https://github.com/Yvonne511
 
 ## Product vision statement
