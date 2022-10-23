@@ -11,7 +11,7 @@ Yvonne Wu (Yiyi Wu) Github Profile: https://github.com/Yvonne511
 
 Shannon Huang Github Profile: https://github.com/shannonh800
 
-Zeren Lu Github Profile: https://github.com/OtisL99
+Otis Lu (Zeren Lu) Github Profile: https://github.com/OtisL99
 
 ## Product vision statement
 
