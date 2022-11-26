@@ -1,0 +1,15 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Flights{% endblock %}
+ 
+{% block content %}
+<div class="container">
+  <div class="page_content">
+    <form action="#" method="post">    
+      {{ form.date_sel(class='datepicker') }}   
+      {{ form.hidden_tag() }}    
+      {{ form.submit}}    
+    </form>
+  </div>
+</div>
+{% endblock %}

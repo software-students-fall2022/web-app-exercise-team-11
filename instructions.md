@@ -74,7 +74,7 @@ Teams must hold 3 or more "daily" standup meetings per week.
   - what have I done since last meeting?
   - what am I working on now?
   - what problems are blocking me for continuing?
-- at the conclusino of each daily standup, one team member must create a single post in the team's Discord channel that documents each member's answers to each of these questions.
+- at the conclusion of each daily standup, one team member must create a single post in the team's Discord channel that documents each member's answers to each of these questions.
 - any blocking problems must be immediately addressed by the team; if the team cannot solve it internally, it must be brought to the attention of the manager (i.e. the professor).
 
 ### GitHub repository

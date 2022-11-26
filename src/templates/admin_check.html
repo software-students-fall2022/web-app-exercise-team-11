@@ -1,0 +1,256 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Flights{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/home">Home</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/check_ad">Flights</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><a href="/search">Search</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+ 
+{% block content %}
+<div class="container">
+    <div class="page_content">
+        {% if delete %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Well Done!</strong> A flight has been deleted.
+        </div>
+        {% endif %}
+        {% if ADDcom %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Well Done!</strong> A new flight has been added.
+        </div>
+        {% endif %}
+        {% if Dup %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Sorry!</strong> There is a duplicate, you can't add a flight with the same flight number.
+        </div>
+        {% endif %}
+        {% if ADD %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Sorry!</strong> You are not adding an valid flight.
+        </div>
+        {% endif %}
+        {% if date %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Sorry!</strong> You are not entering an valid date.
+        </div>
+        {% endif %}
+        {% if update %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Well Done!</strong> Edit complete.
+        </div>
+        {% endif %}
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Add Flight</button>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myAddLabel" aria-hidden="true" action="/edit">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myAddLabel">
+                            Add Flight Information
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/check_ad" method='post'>
+                            <div class="form-group">
+                                <label for="AddFlightName">Flight number: </label>
+                                <input type='hidden' name='AddFlight' value='true'/>
+                                <input class="form-control" name="AddFlightName" placeholder="AB1234C">
+                            </div>
+                            <div class="form-group">
+                                <label for="AddAircraft">Aircraft: </label>
+                                <input class="form-control" name="AddAircraft" placeholder="A123-456">
+                            </div>
+                            <div class="form-group">
+                                <label for="AddDepartPort">Departure Airport: </label>
+                                <input class="form-control" name="AddDepartPort" placeholder="ABCD">
+                            </div>
+                            <div class="form-group">
+                                <label for="AddArrivePort">Arrive Airport: </label>
+                                <input class="form-control" name="AddArrivePort" placeholder="ABCD">
+                            </div>
+                            <div class="form-group">
+                                <label for="AddDepartTime">Departure Time: </label>
+                                <input class="form-control" name="AddDepartTime" placeholder="YYYY/MM/DD hh:mm:ss">
+                            </div>
+                            <div class="form-group">
+                                <label for="AddArriveTime">Arrive Time: </label>
+                                <input class="form-control" name="AddArriveTime" placeholder="YYYY/MM/DD hh:mm:ss">
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                Submit
+                            </button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table table-hover">
+            <caption>Flights Information</caption>
+                <thead>
+                    <tr>
+                    <th>Flight number</th>
+                    <th>Departure Airport</th>
+                    <th>Arrival Airport</th>
+                    <th>Departure Time</th>
+                    <th>Flight Duration</th>
+                    <th>Operate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cur in flights %}
+                    <tr>
+                        <td>{{cur['flight']}}</td>
+                        <td>{{cur['depart_port']}}</td>
+                        <td>{{cur['arrive_port']}}</td>
+                        <td>{{cur['depart_time']}}</td>
+                        <td>{{cur['duration']}}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{cur['_id']}}">Edit</button>
+                            <div class="modal fade" id="myModal{{cur['_id']}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" action="/edit">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel">
+                                                Change Flight Information
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/check_ad" method='post'>
+                                                <div class="form-group">
+                                                    <label for="InputID">Flight ID: {{cur['_id']}}</label>
+                                                    <input type='hidden' name='EditFlight' value='true'/>
+                                                    <input type='hidden' name='InputID' value='{{cur['_id']}}'/>
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="InputFlightName">Flight number: {{cur['flight']}}</label>
+                                                  <input class="form-control" name="InputFlightName" placeholder="AB1234C">
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="InputAircraft">Aircraft: {{cur['aircraft']}}</label>
+                                                  <input class="form-control" name="InputAircraft" placeholder="A123-456">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="InputDepartPort">Departure Airport: {{cur['depart_port']}}</label>
+                                                    <input class="form-control" name="InputDepartPort" placeholder="ABCD">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="InputArrivePort">Arrive Airport: {{cur['arrive_port']}}</label>
+                                                    <input class="form-control" name="InputArrivePort" placeholder="ABCD">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="InputDepartTime">Departure Time: {{cur['depart_time']}}</label>
+                                                    <input class="form-control" name="InputDepartTime" placeholder="YYYY/MM/DD hh:mm:ss">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="InputArriveTime">Arrive Time: {{cur['arrive_time']}}</label>
+                                                    <input class="form-control" name="InputArriveTime" placeholder="YYYY/MM/DD hh:mm:ss">
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">
+                                                    Submit
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalDel{{cur['_id']}}">Delete</button>
+                            <div class="modal fade" id="myModalDel{{cur['_id']}}" tabindex="-1" role="dialog" aria-labelledby="myModalDelLabel" aria-hidden="true" action="/edit">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalDelLabel">
+                                                Deleting this flight entry
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/check_ad" method='post'>
+                                                <div class="form-group">
+                                                    <label for="InputID">Flight ID: {{cur['_id']}}</label>
+                                                    <input type='hidden' name='DelFlight' value='true'/>
+                                                    <input type='hidden' name='InputID' value='{{cur['_id']}}'/>
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="InputFlightName">Flight number: {{cur['flight']}}</label>
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="InputAircraft">Aircraft: {{cur['aircraft']}}</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="InputDepartPort">Departure Airport: {{cur['depart_port']}}</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="InputArrivePort">Arrive Airport: {{cur['arrive_port']}}</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="InputDepartTime">Departure Time: {{cur['depart_time']}}</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="InputArriveTime">Arrive Time: {{cur['arrive_time']}}</label>
+                                                </div>
+                                                <button type="submit" class="btn btn-danger">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
